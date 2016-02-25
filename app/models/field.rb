@@ -8,6 +8,7 @@ class Field
      @the_grid = the_grid
      @high = high
      @width = width
+     @creation_time = Time.now
   end
 
   def grid
