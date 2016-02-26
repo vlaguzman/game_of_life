@@ -11,20 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207030223) do
+ActiveRecord::Schema.define(version: 20160207025623) do
 
   create_table "fields", force: :cascade do |t|
     t.integer "high"
     t.integer "width"
   end
-
-  create_table "spaces", force: :cascade do |t|
-    t.integer "field_id"
-    t.string  "state"
-    t.integer "pos_x"
-    t.integer "pos_y"
-  end
-
-  add_index "spaces", ["field_id"], name: "index_spaces_on_field_id"
 
 end

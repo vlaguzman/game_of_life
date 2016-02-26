@@ -11,34 +11,22 @@ class Field
      @creation_time = Time.now
   end
 
-  def grid
-    @the_grid
-  end
-  
-  def is_valid?(pos_y, pos_x)
-    pos_x.to_i >= 0 && pos_x.to_i < @width.to_i && pos_y.to_i >= 0 && pos_y.to_i < @high.to_i
-  end
-
-  def evaluate_space(pos_y, pos_x)
-    @the_grid.send(:[]=,pos_y,pos_x,RESPONSE_VALUES[@the_grid[pos_y, pos_x].to_sym][neighboring_cells(pos_y, pos_x)]) 
-  end
-
   def neighboring_cells(pos_y, pos_x)
-    spaces = neighboring_spaces(pos_y, pos_x)
-    spaces.delete_if{|val| val[0]<0 || val[1]<0}
-    spaces.inject(0){|sum, pair| @the_grid[pair[0], pair[1]].nil? ? sum + 0 : (@the_grid[pair[0], pair[1]] == "occupied" ? sum + 1 : sum + 0) }
+      spaces = neighboring_spaces(pos_y, pos_x)
+      spaces.delete_if{|val| val[0]<0 || val[1]<0}
+      spaces.inject(0){|sum, pair| @the_grid[pair[0], pair[1]].nil? ? sum + 0 : (@the_grid[pair[0], pair[1]] == "occupied" ? sum + 1 : sum + 0) }
   end
   
   def neighboring_spaces(pos_y, pos_x)
     array = Array.new
-    array << [pos_y-1, pos_x-1] #if is_valid?(pos_y-1, pos_x-1)
-    array << [pos_y-1, pos_x] #if is_valid?(pos_y-1, pos_x)
-    array << [pos_y-1, pos_x+1] #if is_valid?(pos_y-1, pos_x+1)
-    array << [pos_y+1, pos_x-1] #if is_valid?(pos_y+1, pos_x-1)
-    array << [pos_y, pos_x-1] #if is_valid?(pos_y, pos_x-1)
-    array << [pos_y+1, pos_x] #if is_valid?(pos_y+1, pos_x)
-    array << [pos_y+1, pos_x+1] #if is_valid?(pos_y+1, pos_x+1)
-    array << [pos_y, pos_x+1] #if is_valid?(pos_y, pos_x+1)
+    array << [pos_y-1, pos_x-1]
+    array << [pos_y-1, pos_x]
+    array << [pos_y-1, pos_x+1]
+    array << [pos_y+1, pos_x-1]
+    array << [pos_y, pos_x-1]
+    array << [pos_y+1, pos_x]
+    array << [pos_y+1, pos_x+1]
+    array << [pos_y, pos_x+1]
     array
   end
 end
